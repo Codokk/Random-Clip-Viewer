@@ -43,7 +43,7 @@ xpress.get("/", (req, res) => {
   res.sendFile(__dirname + "/view/View.html");
 });
 xpress.get("/View.css", (req, res)=>{
-  res.setHeader("Content-Type","application/css");
+  res.setHeader("Content-Type","text/css");
   res.sendFile(path.join(__dirname, "view/View.css"));
 })
 xpress.get("/View.js", (req, res)=>{
