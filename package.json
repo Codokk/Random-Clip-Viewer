@@ -1,0 +1,23 @@
+{
+  "name": "RandomVideo",
+  "version": "0.0.1",
+  "description": "Displays random videos in a browserwindow for obs",
+  "main": "main.js",
+  "author": "Cody Krist",
+  "license": "MIT",
+  "build": {
+    "appId": "com.techeron.randomvideo"
+  },
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "electron": "^18.0.2",
+    "electron-builder": "^22.14.13"
+  }
+}

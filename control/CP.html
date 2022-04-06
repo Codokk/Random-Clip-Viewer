@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Pannel</title>
+    <style>
+        * {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+#MainContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.button {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+.button:hover {
+  border: 2px solid black;
+  cursor: pointer;
+}
+.button.started {
+  background: green;
+}
+.button.stopped {
+  background: red;
+}
+.flexrow {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.flexrow > div {
+    width: 33%;
+}
+
+    </style>
+</head>
+<body>
+    <div id="MainContainer">
+        <div id="Row1">
+          <div id="StartServerButton" class="button stopped">Start Server</div>
+        </div>
+        <div id="Row2" class="flexrow">
+          <div>
+            Current Dir: <br/>
+            <p id="CurrentDir">Loading...</p><br/>
+            <div id="ChangeDirButton" class="button">Change Directory</div>
+          </div>
+          <div>test2</div>
+          <div>test3</div>
+        </div>
+      </div>
+    <script type="module" src="CP.js"></script>
+</body>
+</html>
