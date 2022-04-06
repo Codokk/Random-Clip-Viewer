@@ -16,6 +16,11 @@ document.getElementById("UpdateSettings").addEventListener("click", () => {
   SendLog("Requesting Settings Update");
   ipcRenderer.send("UpdatePort", document.getElementById("Port").value);
 });
+// Quit app
+document.getElementById("QuitButton").addEventListener("click", () => {
+  Log("Exiting...", 'red');
+  ipcRenderer.send("quit");
+});
 // Synchronous message emmiter and handler
 SendLog("Marco");
 ReceiveLog(ipcRenderer.sendSync("Marco"));

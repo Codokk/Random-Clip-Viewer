@@ -12,6 +12,7 @@ let WatchPath = "Unset";
 // Settings Requirements
 const Store = require("./store.js");
 const res = require("express/lib/response");
+const { exit } = require("process");
 let store = new Store();
 port = store.get("port");
 WatchPath = store.get("path");
@@ -26,8 +27,9 @@ const supportedExtensions = [".mp4"];
 const createWindow = () => {
   //Opens the Control Pannel
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 750,
+    height: 500,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -126,6 +128,10 @@ ipcMain.on("toggle-server", async (e, args) => {
   isServerRunning = !isServerRunning;
   e.sender.send("toggled-server");
 });
+ipcMain.on("quit",()=>{
+  mainWindow.close();
+  exit();
+})
 
 function ScanVideos() {
   allVideos = new Array();
