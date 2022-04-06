@@ -22,16 +22,11 @@
         transition: all 3s ease-in-out;
         opacity: 1;
       }
-      button {
-        z-index: 1000;
-        position: fixed;
-      }
     </style>
   </head>
   <body>
     <video id="PrimaryVideo" class="active" src=""></video>
     <video id="SecondaryVideo" src=""></video>
-    <button onClick="START()">START</button>
     <script>
       let PV = document.getElementById("PrimaryVideo");
       let SV = document.getElementById("SecondaryVideo");
@@ -70,9 +65,9 @@
         }, crossfade - 3);
       }
       function START() {
-        document.querySelector("button").style.display = "none";
         getVideo();
       }
+      document.addEventListener('DOMContentLoaded', START());
     </script>
   </body>
 </html>

@@ -5,15 +5,21 @@ const fs = require("fs");
 // Webserver Requirements
 const express = require("express");
 const xpress = express();
-const port = 8675; //309
+// Default Stuff incase store doesn't loadFile
+let port = 8675; //309
+let WatchPath = "Unset";
+// Settings Requirements
+const Store = require("./store.js");
+let store = new Store();
+port = store.get("port");
+WatchPath = store.get("path");
 
 let isServerRunning = false;
 let mainWindow;
-let WatchPath = "Unset";
 let allVideos = new Array();
 let availVideos = new Array();
 let Server;
-const supportedExtensions = [".mp4", ".wav"];
+const supportedExtensions = [".mp4"];
 
 const createWindow = () => {
   //Opens the Control Pannel
@@ -29,7 +35,9 @@ const createWindow = () => {
 };
 /* Express Routing */
 xpress.get("/", (req, res) => {
+  res.setHeader("Feature-Policy","autoplay 'self'");
   res.sendFile(__dirname + "/view/View.html");
+
 });
 xpress.get("/randomvideo", (req, res) => {
   // Handles the logic of which video to play
@@ -81,6 +89,7 @@ xpress.get("/playvideo/:id", (req, res) => {
 ipcMain.on("Marco", (e, args) => {
   e.returnValue = "Polo";
   e.sender.send("WatchedDirectory", WatchPath);
+  e.sender.send("Port", port);
 });
 ipcMain.on("select-dirs", async (e, args) => {
   const result = await dialog.showOpenDialog(mainWindow, {
@@ -90,12 +99,14 @@ ipcMain.on("select-dirs", async (e, args) => {
   let newPath = result.filePaths[0];
   e.sender.send("WatchedDirectory", newPath);
   WatchPath = newPath;
+  store.set('path', newPath);
   ScanVideos();
 });
 ipcMain.on("toggle-server", async (e, args) => {
   if (isServerRunning) {
     Server.close();
   } else {
+    ScanVideos();
     Server = xpress.listen(port);
   }
   isServerRunning = !isServerRunning;

@@ -1,69 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Control Pannel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
-        * {
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-#MainContainer {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
+      #MainContainer {
   position: fixed;
   top:0;
   left:0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-}
-.button {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-weight: bold;
-}
-.button:hover {
-  border: 2px solid black;
-  cursor: pointer;
-}
-.button.started {
-  background: green;
-}
-.button.stopped {
-  background: red;
-}
-.flexrow {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
-.flexrow > div {
-    width: 33%;
+#Overlay {
+  z-index: 100;
+  position: fixed;
+  bottom: 5px;
+  right:5px;
 }
-
+#Console {
+  z-index:1;
+  position: absolute;
+  bottom:0;
+  left:0;
+}
+#Content {
+    padding: 1.2rem 2rem;
+}
+      /* * {
+        font-family: sans-serif;
+        box-sizing: border-box;
+      }
+      #MainContainer {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .button {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-weight: bold;
+      }
+      .button:hover {
+        border: 2px solid black;
+        cursor: pointer;
+      }
+      .button.started {
+        background: green;
+      }
+      .button.stopped {
+        background: red;
+      }
+      .flexrow {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+      }
+      .flexrow > div {
+        width: 33%;
+      } */
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="MainContainer">
-        <div id="Row1">
-          <div id="StartServerButton" class="button stopped">Start Server</div>
-        </div>
-        <div id="Row2" class="flexrow">
-          <div>
-            Current Dir: <br/>
-            <p id="CurrentDir">Loading...</p><br/>
-            <div id="ChangeDirButton" class="button">Change Directory</div>
+      <div id="Content" class="card blue-grey">
+        <span class="card-title white-text">Random Videos</span>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input placeholder="8675" id="Port" type="text" />
+                <label for="Port">Current Port</label>
+              </div>
+              <div class="input-field col s6">
+                <input
+                  placeholder="loading..."
+                  id="BrowserSourceUrl"
+                  type="text"
+                  disabled
+                />
+                <label for="BrowserSourceUrl">BrowserSource URL</label>
+              </div>
+            </div>
+            <div class="row">
+              <div id="ClipsDirectoryContainer"class="input-field col s12">
+                <input disabled value="Loading..." id="ClipsDirectory" type="text" />
+                <label for="ClipsDirectory">Clips Directory</label>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="btn-large col s12">Update Settings</div>
           </div>
-          <div>test2</div>
-          <div>test3</div>
+          <div class="row">
+            <div id="StartServerButton" class="btn-large col s12">Start Server</div>
+          </div>
         </div>
       </div>
+    </div>
+    <div id="Overlay">
+
+    </div>
+    <div id="Console">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="module" src="CP.js"></script>
-</body>
+  </body>
 </html>
