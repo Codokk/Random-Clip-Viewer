@@ -11,6 +11,7 @@ let port = 8675; //309
 let WatchPath = "Unset";
 // Settings Requirements
 const Store = require("./store.js");
+const res = require("express/lib/response");
 let store = new Store();
 port = store.get("port");
 WatchPath = store.get("path");
@@ -38,8 +39,15 @@ const createWindow = () => {
 xpress.get("/", (req, res) => {
   res.setHeader("Feature-Policy","autoplay 'self'");
   res.sendFile(__dirname + "/view/View.html");
-
 });
+xpress.get("/View.css", (req, res)=>{
+  res.setHeader("Content-Type","application/css");
+  res.sendFile(path.join(__dirname, "view/View.css"));
+})
+xpress.get("/View.js", (req, res)=>{
+  res.setHeader("Content-Type","text/javascript");
+  res.sendFile(path.join(__dirname, "view/View.js"));
+})
 xpress.get("/randomvideo", (req, res) => {
   // Handles the logic of which video to play
   console.log("Getting Random Video");
@@ -92,6 +100,11 @@ ipcMain.on("Marco", (e, args) => {
   e.sender.send("WatchedDirectory", WatchPath);
   e.sender.send("Port", port);
 });
+ipcMain.on("UpdatePort", (e, arg) => {
+  store.set("port",arg);
+  port = arg;
+  e.sender.send("Port", port);
+})
 ipcMain.on("select-dirs", async (e, args) => {
   const result = await dialog.showOpenDialog(mainWindow, {
     properties: ["openDirectory"],
