@@ -1,6 +1,6 @@
 {
   "name": "RandomVideo",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Displays random videos in a browserwindow for obs",
   "main": "main.js",
   "author": "Cody Krist",
