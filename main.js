@@ -1,5 +1,6 @@
 // Electron Requirements
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+require('update-electron-app')({updateInterval: '1 hour'})
 const path = require("path");
 const fs = require("fs");
 // Webserver Requirements
